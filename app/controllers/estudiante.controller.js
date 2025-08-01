@@ -23,7 +23,7 @@ exports.create = (req, res) => {
     };
 
     // Save a new Client into the database
-    Libro.create(estudiante)
+    Estudiante.create(estudiante)
         .then(data => {
             res.send(data);
         })
