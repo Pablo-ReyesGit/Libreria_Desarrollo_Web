@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         correo: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
     });
     return Estudiante;
