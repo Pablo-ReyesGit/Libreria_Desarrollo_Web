@@ -6,23 +6,19 @@ const Sequelize = require("sequelize");
 
 // Creamos una instancia de Sequelize con los parámetros de conexión, incluyendo SSL para NeonDB
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-  host: dbConfig.HOST,            // Dirección del servidor (host) de la base de datos
-  dialect: dbConfig.dialect,      // El tipo de base de datos, en este caso 'postgres'
-
-  // Configuraciones específicas del dialecto (PostgreSQL), incluyendo la conexión segura SSL
+  host: dbConfig.HOST,
+  dialect: dbConfig.dialect,
   dialectOptions: {
     ssl: {
-      require: true,              // Indica que la conexión debe usar SSL obligatoriamente
-      rejectUnauthorized: false   // Acepta certificados autofirmados o no verificados (útil en entornos no productivos)
+      require: true, // 👈 corregido: antes decía "requere"
+      rejectUnauthorized: false
     }
   },
-
-  // Configuración del pool de conexiones para optimizar el rendimiento
   pool: {
-    max: dbConfig.pool.max,       // Máximo de conexiones simultáneas
-    min: dbConfig.pool.min,       // Mínimo de conexiones
-    acquire: dbConfig.pool.acquire, // Tiempo máximo para obtener una conexión antes de lanzar error
-    idle: dbConfig.pool.idle      // Tiempo que una conexión puede estar inactiva antes de ser liberada
+    max: dbConfig.pool.max,
+    min: dbConfig.pool.min,
+    acquire: dbConfig.pool.acquire,
+    idle: dbConfig.pool.idle
   }
 });
 
@@ -37,9 +33,26 @@ db.sequelize = sequelize;
 
 // Importamos el modelo de cliente desde la carpeta 'models' y lo registramos en el objeto `db`
 // Le pasamos la instancia de conexión `sequelize` y la clase `Sequelize` como argumentos
+try {
 db.libros = require("./libro.model.js")(sequelize, Sequelize);
+  console.log("✅ Modelo 'libro' cargado correctamente.");
+} catch (err) {
+  console.error("❌ Error al cargar modelo 'libros':", err.message);
+}
+
+try{
 db.estudiantes = require("./estudiante.model.js")(sequelize, Sequelize);
+  console.log("✅ Modelo 'estudiante' cargado correctamente.");
+} catch (err) {
+  console.error("❌ Error al cargar modelo 'estudiantes':", err.message);
+}
+
+try{
 db.prestamos = require("./prestamo.model.js")(sequelize, Sequelize);
+  console.log("✅ Modelo 'prestamo' cargado correctamente.");
+} catch (err) {
+  console.error("❌ Error al cargar modelo 'prestamos':", err.message);
+}
 
 // Aquí puedes seguir importando otros modelos de forma similar
 // Ejemplo: db.productos = require("./producto.model.js")(sequelize, Sequelize);

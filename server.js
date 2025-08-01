@@ -29,11 +29,28 @@ app.get("/", (req, res) => {
   res.json({ message: "UMG Web Application" });
 });
 
-require("./app/routes/libro.routes.js")(app);
-require("./app/routes/estudiante.routes.js")(app);
-require("./app/routes/prestamo.routes.js")(app);
+try {
+  require("./app/routes/libro.routes.js")(app);
+  console.log("✅ libros.routes.js cargado correctamente");
+} catch (err) {
+  console.error("❌ Error al cargar libros.routes.js:", err.message);
+}
+
+try {
+  require("./app/routes/estudiante.routes.js")(app);
+  console.log("✅ estudiante.routes.js cargado correctamente");
+} catch (err) {
+  console.error("❌ Error al cargar estudiante.routes.js:", err.message);
+}
+
+try {
+  require("./app/routes/prestamo.routes.js")(app);
+  console.log("✅ prestamo.routes.js cargado correctamente");
+} catch (err) {
+  console.error("❌ Error al cargar prestamo.routes.js:", err.message);
+}
 // set port, listen for requests
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+    console.log(`🚀 Servidor iniciado correctamente en el puerto ${PORT}.`);
 }); 
