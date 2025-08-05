@@ -10,7 +10,7 @@ module.exports = app => {
     // Retrieve a single Client with id
     router.get("/:id", estudiante.findOne);
     // Relieve all the books that the student had booked
-    router.get(":id/prestamos", estudiante.findBook);
+    router.get("/:id/prestamos", estudiante.findBook);
     // Update a Client with id
     router.put("/update/:id", estudiante.update);
     // Delete a Client with id
