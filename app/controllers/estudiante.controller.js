@@ -74,22 +74,20 @@ exports.findWithPrestamos = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const estudiante = await Estudiante.findByPk(id, {
-            include: [
-                {
-                    model: Prestamo,
-                    as: "prestamos"
-                }
-            ]
-        });
+        const prestamo = await Prestamo.findAll(
+            {
+                attributes: ['libroId', 'estudianteId', 'fechaPrestamo'],
+                where: {libroId : id}
+            }
+        );
 
-        if (!estudiante) {
+        if (!prestamo) {
             return res.status(404).send({
                 message: `No se encontró el estudiante con id=${id}`
             });
         }
 
-        res.send(estudiante);
+        res.send(prestamo);
     } catch (err) {
         console.error("Error en findWithPrestamos:", err); // <--- log completo
         res.status(500).send({
