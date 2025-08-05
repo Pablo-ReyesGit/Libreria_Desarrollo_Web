@@ -54,6 +54,13 @@ db.prestamos = require("./prestamo.model.js")(sequelize, Sequelize);
   console.error("❌ Error al cargar modelo 'prestamos':", err.message);
 }
 
+
+db.libros.hasMany(db.prestamos, { foreignKey: 'id' });
+db.prestamos.belongsTo(db.libros, { foreignKey: 'libroId' });
+
+db.estudiantes.hasMany(db.prestamos, { foreignKey: 'id' });
+db.prestamos.belongsTo(db.estudiantes, { foreignKey: 'estudianteId' });
+
 // Aquí puedes seguir importando otros modelos de forma similar
 // Ejemplo: db.productos = require("./producto.model.js")(sequelize, Sequelize);
 
