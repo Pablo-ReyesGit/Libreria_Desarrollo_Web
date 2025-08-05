@@ -5,8 +5,10 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Client
 exports.create = (req, res) => {
+    console.log("➡️ req.body recibido:", req.body);
+
     // Validamos que dentro del  request no venga vacio el nombre, de lo contrario returna error
-    if (!req.body.estudianteId) {
+    if (!req.body.libroId) {
         res.status(400).send({
             message: "Content can not be empty!"
         });

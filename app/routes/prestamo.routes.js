@@ -1,5 +1,5 @@
 module.exports = app => {
-    const prestamos = require("../controllers/estudiante.controller.js");
+    const prestamos = require("../controllers/prestamo.controller.js");
     var router = require("express").Router();
     // Create a new Client
     router.post("/create/", prestamos.create);

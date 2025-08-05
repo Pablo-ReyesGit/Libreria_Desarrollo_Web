@@ -55,10 +55,10 @@ db.prestamos = require("./prestamo.model.js")(sequelize, Sequelize);
 }
 
 
-db.libros.hasMany(db.prestamos, { foreignKey: 'id' });
+db.libros.hasMany(db.prestamos, { foreignKey: 'Id' });
 db.prestamos.belongsTo(db.libros, { foreignKey: 'libroId' });
 
-db.estudiantes.hasMany(db.prestamos, { foreignKey: 'id' });
+db.estudiantes.hasMany(db.prestamos, { foreignKey: 'Id' });
 db.prestamos.belongsTo(db.estudiantes, { foreignKey: 'estudianteId' });
 
 // Aquí puedes seguir importando otros modelos de forma similar
