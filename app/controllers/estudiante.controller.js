@@ -77,7 +77,7 @@ exports.findWithPrestamos = async (req, res) => {
             include: [
                 {
                     model: Prestamo,
-                    as: "prestamos" // Debe coincidir con el alias usado en la asociación
+                    as: "prestamos"
                 }
             ]
         });
@@ -90,12 +90,13 @@ exports.findWithPrestamos = async (req, res) => {
 
         res.send(estudiante);
     } catch (err) {
+        console.error("Error en findWithPrestamos:", err); // <--- log completo
         res.status(500).send({
-            message: "Error al obtener el estudiante con id=" + id
+            message: "Error al obtener el estudiante con id=" + id,
+            details: err.message // opcional mientras depuras
         });
     }
 };
-
 
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
