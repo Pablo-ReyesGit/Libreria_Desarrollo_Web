@@ -67,6 +67,36 @@ exports.findOne = (req, res) => {
         });
 };
 
+// Exportamos la función `findOne` para que pueda usarse desde las rutas u otros módulos.
+// Es una función asíncrona porque usa `await` para esperar la consulta a la base de datos.
+exports.findWithPrestamos = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const estudiante = await Estudiante.findByPk(id, {
+            include: [
+                {
+                    model: Prestamo,
+                    as: "prestamos" // Debe coincidir con el alias usado en la asociación
+                }
+            ]
+        });
+
+        if (!estudiante) {
+            return res.status(404).send({
+                message: `No se encontró el estudiante con id=${id}`
+            });
+        }
+
+        res.send(estudiante);
+    } catch (err) {
+        res.status(500).send({
+            message: "Error al obtener el estudiante con id=" + id
+        });
+    }
+};
+
+
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
