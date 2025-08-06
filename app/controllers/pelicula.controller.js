@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Client
 exports.create = (req, res) => {
     // Validamos que dentro del  request no venga vacio el nombre, de lo contrario returna error
-    if (!req.body.nombre) {
+    if (!req.body.Nombre) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
 
     // Create a Client, definiendo una variable con la estructura del reques para luego solo ser enviada como parametro mas adelante. 
     const pelicula = {
-        Nombre: req.body.nombre,
+        Nombre: req.body.Nombre,
         Sinopsis: req.body.Sinopsis,
         Actores: req.body.Actores, 
         Tipo: req.body.Tipo,
@@ -40,7 +40,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Client from the database.
 exports.findAll = (req, res) => {
-    const nombre = req.query.nombre;
+    const nombre = req.query.Nombre;
     var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
 
     Pelicula.findAll({ where: condition })
