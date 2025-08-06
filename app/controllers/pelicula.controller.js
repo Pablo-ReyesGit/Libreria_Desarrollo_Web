@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Client
 exports.create = (req, res) => {
     // Validamos que dentro del  request no venga vacio el nombre, de lo contrario returna error
-    if (!req.body.Nombre) {
+    if (!req.body.nombre) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
 
     // Create a Client, definiendo una variable con la estructura del reques para luego solo ser enviada como parametro mas adelante. 
     const pelicula = {
-        Nombre: req.body.Nombre,
+        Nombre: req.body.nombre,
         Sinopsis: req.body.Sinopsis,
         Actores: req.body.Actores, 
         Tipo: req.body.Tipo,
