@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
         }
         ,  
         AnioLanzamiento: {
-            type: Sequelize.DATE
+            type: Sequelize.INTEGER
         }
     });
     return Pelicula;
