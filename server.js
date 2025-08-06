@@ -49,6 +49,13 @@ try {
 } catch (err) {
   console.error("❌ Error al cargar prestamo.routes.js:", err.message);
 }
+
+try {
+  require("./app/routes/pelicula.routes.js")(app);
+  console.log("✅ pelicula.routes.js cargado correctamente");
+} catch (err) {
+  console.error("❌ Error al cargar pelicula.routes.js:", err.message);
+}
 // set port, listen for requests
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {

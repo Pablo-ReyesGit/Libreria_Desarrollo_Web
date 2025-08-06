@@ -54,6 +54,13 @@ db.prestamos = require("./prestamo.model.js")(sequelize, Sequelize);
   console.error("❌ Error al cargar modelo 'prestamos':", err.message);
 }
 
+try{
+db.prestamos = require("./pelicula.model.js")(sequelize, Sequelize);
+  console.log("✅ Modelo 'pelicula' cargado correctamente.");
+} catch (err) {
+  console.error("❌ Error al cargar modelo 'pelicula':", err.message);
+}
+
 
 db.libros.hasMany(db.prestamos, { foreignKey: 'id' });
 db.prestamos.belongsTo(db.libros, { foreignKey: 'libroId' });
